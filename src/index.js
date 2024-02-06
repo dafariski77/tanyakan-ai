@@ -19,17 +19,21 @@ app.get("/", async (req, res) => {
 
     const chatCompletion = await openai.chat.completions.create(params);
 
-    return res.send({
-      data: {
-        message: chatCompletion.choices[0].message.content,
-      },
-    });
+    return res
+      .json({
+        data: {
+          message: chatCompletion.choices[0].message.content,
+        },
+      })
+      .status(200);
   } catch (error) {
-    return res.json({
-      errors: {
-        message: error.error.message,
-      },
-    });
+    return res
+      .json({
+        errors: {
+          message: error.error.message,
+        },
+      })
+      .status(400);
   }
 });
 
